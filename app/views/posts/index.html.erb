@@ -1,0 +1,12 @@
+<h1>Forumz!</h1>
+
+<% @posts.each do |post| %>
+  <div>
+    <strong><%= link_to post.title, posts_path(post) %></strong>
+    <br>
+    <strong>Author:</strong> <%= link_to post.user.name, users_path(post.user) %>
+    <br>
+    <p><%= post.text %></p>
+    <span class="timestamp"><%= time_ago_in_words(post.created_at) %> ago</span>
+  </div>
+<% end %>
