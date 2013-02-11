@@ -1,0 +1,7 @@
+<h1>Log In to FORUMZ</h1>
+<%= form_for @user, :url => new_session_path do |f| %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <br>
+  <%= f.submit "Log In" %>
+<% end %>

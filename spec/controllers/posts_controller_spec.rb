@@ -34,7 +34,7 @@ describe PostsController do
 
     it "redirects after successful create" do
       post :create, params
-      expect(response).to redirect_to(posts_path(assigns(:post).id))
+      expect(response).to redirect_to(post_path(assigns(:post).id))
     end
   end
 end

@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(params[:user][:email])
 
     if @user
-      @user.session_token = SecureRandom.base64
+      @user.session_token = SecureRandom.urlsafe_base64
       session[:session_token] = @user.session_token
       @user.save!
       redirect_to posts_path

@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post])
     @post.save!
 
-    redirect_to posts_path(@post)
+    redirect_to post_path(@post)
   end
 
   def show

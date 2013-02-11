@@ -2,7 +2,7 @@
 
 <% @posts.each do |post| %>
   <div>
-    <strong><%= link_to post.title, posts_path(post) %></strong>
+    <strong><%= link_to post.title, post_path(post) %></strong>
     <br>
     <strong>Author:</strong> <%= link_to post.user.name, users_path(post.user) %>
     <br>
