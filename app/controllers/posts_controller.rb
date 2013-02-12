@@ -19,12 +19,31 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
+
+    return_json = {:post => @post, :comments => @post.comments, :tags => @post.tags}
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render :json => return_json }
+    end
   end
 
   def index
     @posts = Post.all.reverse
     @post = Post.new
     @post.tags.build
+
+    return_hash = {}
+    @posts.each do |post|
+      return_hash[post.id] = {:post => post,
+                     :comments => post.comments,
+                     :tags => post.tags}
+    end
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render :json => return_hash }
+    end
   end
 
   def destroy

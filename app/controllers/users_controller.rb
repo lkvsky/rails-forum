@@ -17,6 +17,20 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
+    user_posts = @user.posts.map do |post|
+      post = {:post => post, :comments => post.comments, :tags => post.tags}
+    end
+
+    return_hash = {
+      :user => @user,
+      :posts => user_posts
+    }
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render :json => return_hash }
+    end
   end
 
   def destroy
