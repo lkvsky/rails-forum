@@ -10,13 +10,36 @@
  *
  *= require_self
  */
+@import 'bootstrap-styles';
 @import 'bootstrap';
+@import url(http://fonts.googleapis.com/css?family=Didact+Gothic);
 
-h1, h2, h3 {
+h1, h2 {
   text-align: center;
 }
 
 .sign-up {
   text-align: center;
   margin-top: 100px;
+}
+
+.timestamp {
+  position: relative;
+  top: 10px;
+  left: 75%;
+  text-decoration: italic;
+  font-size: .75em;
+}
+
+.user-show {
+  text-align: center;
+}
+
+body {
+  background-color: $cyan;
+  font-family: 'Didact Gothic';
+}
+
+.alert {
+  border: dashed $linkColor 1px;
 }

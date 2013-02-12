@@ -4,11 +4,16 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
-    @post.save!
-    flash[:notice] = "Thanks for posting!"
+    params[:post][:tag_ids].last.delete
 
-    redirect_to root_path
+    @post = Post.new(params[:post])
+    if @post.save
+      flash[:notice] = "Thanks for posting!"
+      redirect_to root_path
+    elsif @post.tag_ids.last.name == ''
+      @post.tag_ids.last.destroy
+    end
+
   end
 
   def show

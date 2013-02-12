@@ -22,14 +22,18 @@
   </div>
   <div class="span8">
     <% @posts.each do |post| %>
-      <div class="well">
-        <strong><%= link_to post.title, post_path(post) %></strong>
-        <br>
+      <div class="well post">
+        <h3><%= link_to post.title, post_path(post) %></h3>
         <strong>Author:</strong> <%= link_to post.user.name, user_path(post.user) %>
         <br>
         <p><%= post.text %></p>
-        <span class="timestamp"><%= time_ago_in_words(post.created_at) %> ago</span> |
-        <span><%= post.comments.count %> comments<span>
+
+        <% if post.post_tags.count > 0 %>
+          <strong>Tags:</strong>
+          <br>
+          <%= post.post_tags.map { |tag| tag.tag.name }.join(", ") %>
+        <% end %>
+        <div class="timestamp"><%= time_ago_in_words(post.created_at) %> ago | <%= post.comments.count %> comments</div>
       </div>
     <% end %>
   </div>
