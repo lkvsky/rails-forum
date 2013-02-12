@@ -44,6 +44,7 @@ class PostsController < ApplicationController
     @posts = Post.all.reverse
     @post = Post.new
     @post.tags.build
+    @most_popular = Post.most_popular
 
     return_hash = {}
     @posts.each do |post|

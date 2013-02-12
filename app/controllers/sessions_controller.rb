@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    @user = User.find_by_session_token(session[:api_key])
+    @user = User.find_by_api_key(session[:api_key])
     flash[:notice] = "Bye, #{@user.name}"
 
     session[:api_key] = nil

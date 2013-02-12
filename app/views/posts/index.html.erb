@@ -20,6 +20,14 @@
       <% end %>
 
     <% end %>
+    <div class="well top-post">
+      <h3>Posts of the Day</h3>
+      <ol>
+        <% @most_popular.each do |post| %>
+          <li><%= link_to post.title, post_path(post) %> (<%= post.comments.count %> comments)</li>
+        <% end %>
+      </ol>
+    </div>
   </div>
   <div class="span8">
     <% @posts.each do |post| %>
