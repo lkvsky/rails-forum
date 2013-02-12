@@ -1,0 +1,31 @@
+
+<h1><%= @post.title %></h1>
+
+<div>
+  <strong>Author:</strong> <%= link_to @post.user.name, user_path(@post.user) %>
+  <br>
+  <p><%= @post.text %></p>
+</div>
+
+<%= simple_form_for @comment, :url => comment_path do |f| %>
+    <%= f.input :text, :input_html => { :rows => 6 } %>
+    <%= f.hidden_field :post_id, :value => @post.id %>
+    <% if current_user %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <%= f.submit "Create Post" %>
+    <% else %>
+      <%= link_to "log-in before you post!", new_session_path %>
+    <% end %>
+<% end %>
+
+<br><br>
+
+<% @post.comments.reverse.each do |comment| %>
+  <div>
+    <strong>Author:</strong> <%= link_to comment.user.name, user_path(comment.user) %>
+    <p><%= comment.text %></p>
+    <span class="timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>
+  </div>
+<% end %>
+
+<br><br>

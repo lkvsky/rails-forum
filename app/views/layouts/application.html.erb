@@ -8,6 +8,18 @@
 </head>
 <body>
 
+<%= link_to 'Home', root_path %>
+|
+<% if current_user %>
+  <%= link_to 'Log Out', session_path, :method => :delete %>
+  |
+  Hello, <%=link_to current_user.name, user_path(current_user) %>
+<% else %>
+  <%= link_to 'Sign In', new_session_path %>
+<% end %>
+
+<div><%= flash[:notice] %></div>
+
 <%= yield %>
 
 </body>

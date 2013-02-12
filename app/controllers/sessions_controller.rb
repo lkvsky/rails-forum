@@ -18,11 +18,12 @@ class SessionsController < ApplicationController
 
   def destroy
     @user = User.find_by_session_token(session[:session_token])
+    flash[:notice] = "Bye, #{@user.name}"
 
     session[:session_token] = nil
     @user.session_token = nil
     @user.save
 
-    redirect_to posts_path
+    redirect_to new_session_path
   end
 end

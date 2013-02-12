@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       @user.session_token = SecureRandom.urlsafe_base64
       session[:session_token] = @user.session_token
-      redirect_to user_path(@user)
+      redirect_to root_path
     else
       render 'new'
     end
