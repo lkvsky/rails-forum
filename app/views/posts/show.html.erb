@@ -15,6 +15,7 @@
         <%= f.input :text, :input_html => { :rows => 6 } %>
         <%= f.hidden_field :post_id, :value => @post.id %>
         <% if current_user %>
+          <%= f.hidden_field :api_key, :value => current_user.api_key %>
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= f.submit "Comment", :class => "btn btn-primary" %>
         <% else %>

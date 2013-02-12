@@ -13,6 +13,7 @@
 
       <% if current_user %>
         <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.hidden_field :api_key, :value => current_user.api_key %>
         <%= f.submit "Create Post", :class => "btn btn-primary" %>
       <% else %>
         <%= link_to "log-in before you post!", new_session_path %>
@@ -28,10 +29,10 @@
         <br>
         <p><%= post.text %></p>
 
-        <% if post.post_tags.count > 0 %>
+        <% if post.tags.count > 0 %>
           <strong>Tags:</strong>
           <br>
-          <%= post.post_tags.map { |tag| tag.tag.name }.join(", ") %>
+          <%= post.tags.map { |tag| tag.name }.join(", ") %>
         <% end %>
         <div class="timestamp"><%= time_ago_in_words(post.created_at) %> ago | <%= post.comments.count %> comments</div>
       </div>

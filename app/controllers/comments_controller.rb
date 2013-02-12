@@ -4,14 +4,27 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(params[:comment])
+    api_key = params[:comment].delete(:api_key)
 
-    if @comment.save
+    @comment = Comment.new(params[:comment])
+    @user = User.find(@comment.user_id)
+
+    if @comment.save && api_key == @user.api_key
       post = Post.find(@comment.post_id)
-      redirect_to post_path(post)
+
+      respond_to do |format|
+        format.html { redirect_to post_path(post) }
+        format.json { render :json => @comment }
+      end
     else
-      render 'new'
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render :json => "You're not logged in" }
+      end
     end
+  end
+
+  def show
   end
 
   def destroy

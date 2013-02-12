@@ -7,8 +7,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
-      @user.session_token = SecureRandom.urlsafe_base64
-      session[:session_token] = @user.session_token
+      @user.api_key = SecureRandom.urlsafe_base64
+      session[:api_key] = @user.api_key
       redirect_to root_path
     else
       render 'new'
