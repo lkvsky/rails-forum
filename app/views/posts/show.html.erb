@@ -12,7 +12,7 @@
     <%= f.hidden_field :post_id, :value => @post.id %>
     <% if current_user %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.submit "Create Post" %>
+      <%= f.submit "Comment", :class => "btn btn-primary" %>
     <% else %>
       <%= link_to "log-in before you post!", new_session_path %>
     <% end %>

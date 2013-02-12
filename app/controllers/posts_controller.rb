@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all.reverse
     @post = Post.new
+    @post.tags.build
   end
 
   def destroy

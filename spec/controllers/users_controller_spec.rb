@@ -30,7 +30,7 @@ describe UsersController do
 
     it "redirects after successful create" do
       post :create, params
-      expect(response).to redirect_to(user_path(assigns(:user).id))
+      expect(response).to redirect_to(root_path)
     end
   end
 end

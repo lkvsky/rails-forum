@@ -1,29 +1,36 @@
 <h1>Forumz!</h1>
 
-<div>
-  <%= simple_form_for @post, :url => posts_path do |f| %>
-    <%= f.input :title %>
-    <%= f.input :text, :input_html => { :rows => 6 } %>
-    <% if current_user %>
-      <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.submit "Create Post" %>
-    <% else %>
-      <%= link_to "log-in before you post!", new_session_path %>
+<div class="row">
+  <div class="span4">
+    <%= simple_form_for @post, :url => posts_path do |f| %>
+      <%= f.input :title %>
+      <%= f.input :text, :input_html => { :rows => 6 } %>
+
+      <%= f.association :tags, :collection => Tag.all, :as => :check_boxes, :item_wrapper_class => "inline" %>
+        <%= f.simple_fields_for :tags do |tag_form| %>
+          <%= tag_form.input :name, :label => "Create a new tag" %>
+        <% end %>
+
+      <% if current_user %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.submit "Create Post", :class => "btn btn-primary" %>
+      <% else %>
+        <%= link_to "log-in before you post!", new_session_path %>
+      <% end %>
+
     <% end %>
-  <% end %>
-</div>
-
-<br><br>
-
-<% @posts.each do |post| %>
-  <div>
-    <strong><%= link_to post.title, post_path(post) %></strong>
-    <br>
-    <strong>Author:</strong> <%= link_to post.user.name, user_path(post.user) %>
-    <br>
-    <p><%= post.text %></p>
-    <span class="timestamp"><%= time_ago_in_words(post.created_at) %> ago</span> |
-    <span><%= post.comments.count %> comments<span>
   </div>
-  <br><br>
-<% end %>
+  <div class="span8">
+    <% @posts.each do |post| %>
+      <div class="well">
+        <strong><%= link_to post.title, post_path(post) %></strong>
+        <br>
+        <strong>Author:</strong> <%= link_to post.user.name, user_path(post.user) %>
+        <br>
+        <p><%= post.text %></p>
+        <span class="timestamp"><%= time_ago_in_words(post.created_at) %> ago</span> |
+        <span><%= post.comments.count %> comments<span>
+      </div>
+    <% end %>
+  </div>
+</div>

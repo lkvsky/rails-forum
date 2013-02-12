@@ -1,7 +1,11 @@
 <h1>Log In to FORUMZ</h1>
-<%= simple_form_for @user, :url => session_path do |f| %>
-  <%= f.input :email %>
-  <%= f.submit "Log In" %>
-<% end %>
-<br>
-<%= link_to 'Sign up', new_user_path %>
+<div class="row sign-up">
+  <div class="span4 offset4">
+    <%= simple_form_for @user, :url => session_path do |f| %>
+      <%= f.input :email %>
+      <%= f.submit "Log In", :class => "btn btn-primary" %>
+    <% end %>
+    <br>
+    <%= link_to 'Sign up', new_user_path %>
+  </div>
+</div>
